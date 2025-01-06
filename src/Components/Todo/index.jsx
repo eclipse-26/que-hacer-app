@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React, { useContext, useState } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { TodoContext } from '../Context';
+import TextDefault from '../TextDefault';
 
 export default function Todo({index, text, check}) {
 
@@ -13,10 +14,15 @@ export default function Todo({index, text, check}) {
 
   return (
     <View style={styles.content}>
-      <Text style={styles.index}>{index}</Text>
+      
+      <TextDefault style={styles.index}>{index}</TextDefault>
       <Text style={[styles.text,check ? {...styles.check}:null]}
         onPress={()=>handleCheck()}
-      >{text}</Text>
+      >
+        <TextDefault>
+          {text}
+        </TextDefault>
+      </Text>
       <Ionicons name="close" size={24} color="red" 
         onPress={()=>{deleteTodo(index-1)}}
       />

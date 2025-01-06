@@ -4,16 +4,18 @@ import Todo from '../Components/Todo'
 import { TodoContext } from '../Components/Context'
 import AddTodoModal from '../Components/AddTodoModal'
 import TodosCounter from '../Components/TodosCounter'
+import TextDefault from '../Components/TextDefault'
+import TextHeaderTitle from '../Components/TextHeaderTitle'
 
 export default function AppUI() {
-
 
   const { todos, showAddTodoModal, setShowTodoModal } = useContext(TodoContext)
 
   return (
     <View style={styles.content}>
       <View style={styles.todosContent}>
-        <Text>Tareas Completadas</Text>
+        <TextHeaderTitle>¿Que hacer hoy?</TextHeaderTitle>
+        <TextDefault>Tareas Completadas</TextDefault>
         <TodosCounter />
         <FlatList 
           data={todos}
