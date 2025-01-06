@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
@@ -24,7 +24,14 @@ export default function TextHeaderTitle({children}) {
 
   return (
     <View onLayout={handleOnLayout}>
-      <Text style={{fontFamily:"bebas-neue"}}>{children}</Text>
+      <Text style={styles.text}>{children}</Text>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  text:{
+    fontFamily:"bebas-neue",
+    fontSize: 24
+  }
+})
