@@ -1,15 +1,14 @@
-import { View, StyleSheet, FlatList, Button, Modal } from "react-native";
+import { View, StyleSheet, FlatList, Button, Modal, TouchableHighlight, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useContext, useCallback } from "react";
 import Todo from "../Components/Todo";
 import { TodoContext } from "../Components/Context";
 import AddTodoModal from "../Components/AddTodoModal";
 import TodosCounter from "../Components/TodosCounter";
-import TextDefault from "../Components/TextDefault";
-import TextHeaderTitle from "../Components/TextHeaderTitle";
 import HeaderBar from "../Components/HeaderBar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import AddTodoButton from "../Components/AddTodoButton";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,8 +23,7 @@ export default function AppUI() {
 
   const handleOnLayout = useCallback(async () => {
     if (isLoaded) {
-      await SplashScreen.hideAsync(); //oculta la pantalla de salpicaduras
-      console.log("fuente");
+      await SplashScreen.hideAsync();
     }
   }, [isLoaded]);
 
@@ -38,6 +36,7 @@ export default function AppUI() {
       <HeaderBar />
       <View style={styles.content} onLayout={handleOnLayout}>
         <TodosCounter />
+        <View>
         <FlatList
           data={todos}
           renderItem={({ item, index }) => (
@@ -45,7 +44,8 @@ export default function AppUI() {
           )}
           contentContainerStyle={styles.flatListContentContainer}
         />
-        <Button title="Agregar Tarea" onPress={() => setShowTodoModal(true)} />
+        <AddTodoButton />
+        </View>
         <Modal visible={showAddTodoModal}>
           <AddTodoModal />
         </Modal>

@@ -2,7 +2,6 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useContext, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { TodoContext } from "../Context";
-import TextDefault from "../TextDefault";
 
 export default function Todo({ index, text, check }) {
   const { deleteTodo, checkTodo } = useContext(TodoContext);
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingLeft: 15,
     paddingRight: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#F2F2F2',
     shadowColor: '#000',
     shadowOffset: {width: 4, height: 2},
     shadowOpacity: 0.05,
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#A6DD40'
   },
   index: {
-    width: 18,
+    width: 20,
     fontSize: 16,
     fontFamily: 'jost-medium'
   },
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     fontSize: 16,
-    fontFamily: 'regular'
+    fontFamily: 'jost-regular'
   },
   textCheck: {
     textDecorationLine: 'line-through',
