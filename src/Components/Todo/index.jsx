@@ -12,10 +12,12 @@ export default function Todo({ index, text, check }) {
   };
 
   return (
-    <View style={styles.content}>
-      <Text style={styles.index}>{index}</Text>
+    <View style={[styles.content, check ? { ...styles.contentCheck } : null]}>
+      <Text style={[styles.index, check ? { ...styles.indexCheck } : null]}>
+        {index}.
+      </Text>
       <Text
-        style={[styles.text, check ? { ...styles.check } : null]}
+        style={[styles.text, check ? { ...styles.textCheck } : null]}
         onPress={() => handleCheck()}
       >
         {text}
@@ -23,7 +25,7 @@ export default function Todo({ index, text, check }) {
       <Ionicons
         name="close"
         size={24}
-        color="red"
+        color={check ? "#000000" : "#FF0000"}
         onPress={() => {
           deleteTodo(index - 1);
         }}
@@ -37,17 +39,38 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: 'center',
     maxWidth: "100%",
-    marginBottom: 20,
+    marginBottom: 15,
+    paddingLeft: 15,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {width: 4, height: 2},
+    shadowOpacity: 0.05,
+    shadowRadius: 5.84,
+    elevation: 2,
+    borderRadius: 50,
+  },
+  contentCheck: {
+    backgroundColor: '#A6DD40'
   },
   index: {
-    width: 15,
+    width: 18,
+    fontSize: 16,
+    fontFamily: 'jost-medium'
+  },
+  indexCheck:{
+    color: '#646464',
   },
   text: {
     flex: 1,
-    backgroundColor: "#efefef",
+    paddingVertical: 10,
+    fontSize: 16,
+    fontFamily: 'regular'
   },
-  check: {
-    backgroundColor: "lime",
+  textCheck: {
+    textDecorationLine: 'line-through',
+    color: '#646464',
   },
 });
