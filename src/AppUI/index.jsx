@@ -44,9 +44,14 @@ export default function AppUI() {
           )}
           contentContainerStyle={styles.flatListContentContainer}
         />
-        <AddTodoButton />
+        <AddTodoButton touchFunction={()=>setShowTodoModal(true)}/>
         </View>
-        <Modal visible={showAddTodoModal}>
+        <Modal 
+          visible={showAddTodoModal}
+          animationType='slide'
+          transparent={true}
+          // backdropColor='#000000'          
+        >
           <AddTodoModal />
         </Modal>
       </View>

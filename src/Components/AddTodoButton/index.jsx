@@ -3,13 +3,13 @@ import React, { useContext } from 'react'
 import { TodoContext } from '../Context';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function AddTodoButton() {
+export default function AddTodoButton({touchFunction}) {
 
   const { setShowTodoModal } = useContext(TodoContext);
 
 
   return (
-    <TouchableHighlight style={styles.content} onPress={() => setShowTodoModal(true)} >
+    <TouchableHighlight style={styles.content} onPress={touchFunction}>
         <View style={styles.button}>
             <Ionicons
                 name="add"
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         margin: 'auto',
         marginTop: 20,
         borderRadius: 11,
+        height: 40
     },
     button:{
         display: 'flex',
@@ -46,9 +47,9 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20
     },
-buttonText: {
-    textAlign: 'center',
-    color: '#646464',
-    fontFamily: 'jost-regular',
-}
+    buttonText: {
+        textAlign: 'center',
+        color: '#646464',
+        fontFamily: 'jost-regular',
+    }
 }) 
