@@ -1,12 +1,12 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-export default function AddTodoButton({ touchFunction }) {
+export default function AddTodoButton({ touchFunction, icon, text, textColor="#646464" }) {
   return (
     <TouchableHighlight style={styles.content} onPress={touchFunction}>
       <View style={styles.button}>
-        <Ionicons name="add" size={20} color="#646464" />
-        <Text style={styles.buttonText}>Agregar Tarea</Text>
+        <MaterialIcons name={icon} size={20} color={textColor} />
+        <Text style={[styles.buttonText, {color: textColor}]}>{text}</Text>
       </View>
     </TouchableHighlight>
   );
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
-    color: "#646464",
     fontFamily: "jost-regular",
   },
 });

@@ -1,19 +1,20 @@
 import { View, StyleSheet, FlatList, Button, Modal, TouchableHighlight, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useContext, useCallback } from "react";
-import Todo from "../Components/Todo";
-import { TodoContext } from "../Components/Context";
-import AddTodoModal from "../Components/AddTodoModal";
-import TodosCounter from "../Components/TodosCounter";
-import HeaderBar from "../Components/HeaderBar";
+import Todo from "../components/Todo";
+import { TodoContext } from "../components/Context";
+import AddTodoModal from "../components/AddTodoModal";
+import TodosCounter from "../components/TodosCounter";
+import HeaderBar from "../components/HeaderBar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import AddTodoButton from "../Components/AddTodoButton";
+import AddTodoButton from "../components/AddTodoButton";
+
 
 SplashScreen.preventAutoHideAsync();
 
 export default function AppUI() {
-  const { todos, showAddTodoModal, setShowTodoModal } = useContext(TodoContext);
+  const { todos, showAddTodoModal, setShowTodoModal, setViewTodoModal } = useContext(TodoContext);
 
   const [isLoaded] = useFonts({
     "jost-regular": require("../../assets/fonts/Jost-Regular.ttf"),
@@ -31,6 +32,11 @@ export default function AppUI() {
     return null;
   }
 
+  const showModal = () =>{
+    setViewTodoModal('view-add')
+    setShowTodoModal(true)
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <HeaderBar />
@@ -45,7 +51,11 @@ export default function AppUI() {
           showsVerticalScrollIndicator={false}
         />
         <View style={styles.addTodoFloatButton}>
-          <AddTodoButton touchFunction={()=>setShowTodoModal(true)}/>
+          <AddTodoButton 
+            touchFunction={()=>showModal()}
+            icon="add"
+            text="Agregar"
+          />
         </View>
         <Modal 
           visible={showAddTodoModal}

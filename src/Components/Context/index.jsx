@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -10,6 +9,8 @@ export default function TodoProvider( { children } ) {
     const [todos, setTodos] = useState([])
     const [showAddTodoModal, setShowTodoModal] = useState(false)
     const [counterTodos, setCounterTodos] = useState(0)
+    const [ viewTodoModal, setViewTodoModal ] = useState('')
+    const [ currentIndexTodo, setCurrentIndexTodo ] = useState(0)
 
     useEffect(()=>{
       ( async ()=>{
@@ -35,6 +36,13 @@ export default function TodoProvider( { children } ) {
     const deleteTodo = (index) =>{
       const newTodos = [...todos]
       newTodos.splice(index, 1)
+      setTodos(newTodos)
+      saveTodos(newTodos)
+    }
+
+    const updateTodo = (index, text) =>{
+      const newTodos = [...todos]
+      newTodos[index].text = text
       setTodos(newTodos)
       saveTodos(newTodos)
     }
@@ -81,7 +89,11 @@ export default function TodoProvider( { children } ) {
             showAddTodoModal,
             setShowTodoModal,
             counterTodos,
-            
+            viewTodoModal,
+            setViewTodoModal,
+            currentIndexTodo,
+            setCurrentIndexTodo,
+            updateTodo,
         }}
     >
         {children}

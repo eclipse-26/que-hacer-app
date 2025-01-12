@@ -1,14 +1,21 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { TodoContext } from "../Context";
 
 export default function Todo({ index, text, check }) {
-  const { deleteTodo, checkTodo } = useContext(TodoContext);
+  const { deleteTodo, checkTodo, setShowTodoModal, setViewTodoModal, setCurrentIndexTodo } = useContext(TodoContext);
 
   const handleCheck = () => {
     checkTodo(index - 1);
-  };
+  }
+
+  const showModal = () =>{
+    setViewTodoModal('view-edit')
+    setShowTodoModal(true)
+    setCurrentIndexTodo(index - 1)
+  }
 
   return (
     <View style={[styles.content, check ? { ...styles.contentCheck } : null]}>
@@ -21,14 +28,20 @@ export default function Todo({ index, text, check }) {
       >
         {text}
       </Text>
-      <Ionicons
+      <MaterialIcons
+        name="edit"
+        size={24}
+        color={check ? "#AAAAAA" : "#CCCCCC"}
+        onPress={() => showModal()}
+      />
+      {/* <Ionicons
         name="close"
         size={24}
         color={check ? "#000000" : "#FF0000"}
         onPress={() => {
           deleteTodo(index - 1);
         }}
-      />
+      /> */}
     </View>
   );
 }
