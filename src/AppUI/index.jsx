@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList, Button, Modal, TouchableHighlight, Text } from "react-native";
+import { View, StyleSheet, FlatList, Button, Modal, TouchableHighlight, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useContext, useCallback } from "react";
 import Todo from "../Components/Todo";
@@ -36,21 +36,21 @@ export default function AppUI() {
       <HeaderBar />
       <View style={styles.content} onLayout={handleOnLayout}>
         <TodosCounter />
-        <View>
         <FlatList
           data={todos}
           renderItem={({ item, index }) => (
             <Todo index={index + 1} text={item.text} check={item.check} />
           )}
           contentContainerStyle={styles.flatListContentContainer}
+          showsVerticalScrollIndicator={false}
         />
-        <AddTodoButton touchFunction={()=>setShowTodoModal(true)}/>
+        <View style={styles.addTodoFloatButton}>
+          <AddTodoButton touchFunction={()=>setShowTodoModal(true)}/>
         </View>
         <Modal 
           visible={showAddTodoModal}
           animationType='slide'
-          transparent={true}
-          // backdropColor='#000000'          
+          transparent={true}          
         >
           <AddTodoModal />
         </Modal>
@@ -63,12 +63,21 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     display: "flex",
-    paddingVertical: 60,
+    justifyContent: 'space-between',
+    paddingTop: 20,
     paddingHorizontal: 10,
+    position: 'relative',
+    gap: 10,
   },
   flatListContentContainer: {
     marginTop: 20,
     paddingHorizontal: 5,
+    paddingBottom: 100
+  },
+  addTodoFloatButton:{
+    position: 'absolute',
+    right: 10,
+    bottom: 30
   },
   addTodoModal: {
     position: "absolute",

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#A6DD40'
   },
   index: {
-    width: 20,
+    width: 25,
     fontSize: 16,
     fontFamily: 'jost-medium'
   },

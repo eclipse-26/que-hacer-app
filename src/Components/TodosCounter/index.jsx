@@ -5,7 +5,7 @@ import { TodoContext } from '../Context'
 export default function TodosCounter() {
   const { todos, counterTodos } = useContext(TodoContext)
   return (
-    <View>
+    <View>      
       <Text style={styles.text}>Tareas Completadas</Text>
       <Text style={[styles.text, {...styles.textCounter}]}>
         <Text style={styles.textCount}>{counterTodos}</Text> / {todos.length}
