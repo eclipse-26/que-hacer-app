@@ -11,6 +11,7 @@ export default function TodoProvider( { children } ) {
     const [counterTodos, setCounterTodos] = useState(0)
     const [ viewTodoModal, setViewTodoModal ] = useState('')
     const [ currentIndexTodo, setCurrentIndexTodo ] = useState(0)
+    const [isDeleteOption, setIsDeleteOption] = useState(false)
 
     useEffect(()=>{
       ( async ()=>{
@@ -57,7 +58,6 @@ export default function TodoProvider( { children } ) {
     const getTodos = async () =>{
       try {
         const todosLS = await AsyncStorage.getItem("TODOS")
-        console.log(todosLS)
         return todosLS
       } catch (error) {
         console.log(error)
@@ -68,6 +68,15 @@ export default function TodoProvider( { children } ) {
       try {
         await AsyncStorage.setItem("TODOS", JSON.stringify(todos))
         // getTodos()
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const deleteTodos = async () =>{
+      try {
+        await AsyncStorage.removeItem("TODOS")
+        setTodos([])
       } catch (error) {
         console.log(error)
       }
@@ -94,6 +103,9 @@ export default function TodoProvider( { children } ) {
             currentIndexTodo,
             setCurrentIndexTodo,
             updateTodo,
+            isDeleteOption, 
+            setIsDeleteOption,
+            deleteTodos
         }}
     >
         {children}

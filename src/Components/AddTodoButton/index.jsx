@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-export default function AddTodoButton({ touchFunction, icon, text, textColor="#646464" }) {
+export default function AddTodoButton({ touchFunction, icon, text, textColor="#646464", bgColor="#fff" }) {
   return (
     <TouchableHighlight style={styles.content} onPress={touchFunction}>
-      <View style={styles.button}>
+      <View style={[styles.button, {backgroundColor: bgColor}]}>
         <MaterialIcons name={icon} size={20} color={textColor} />
         <Text style={[styles.buttonText, {color: textColor}]}>{text}</Text>
       </View>

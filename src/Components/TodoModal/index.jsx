@@ -3,16 +3,17 @@ import React, { useContext, useState } from 'react'
 import { TodoContext } from '../Context'
 import AddTodoButton from '../AddTodoButton'
 
-export default function AddTodoModal() {
+export default function TodoModal() {
   const { setShowTodoModal, addTodo, viewTodoModal, currentIndexTodo, todos, updateTodo, deleteTodo } = useContext(TodoContext)
   const [newTodo, setNewTodo] = useState('')
 
-  useState(()=>{
-    console.log(todos[currentIndexTodo].text)
-    setNewTodo(todos[currentIndexTodo].text)
-  },[])
+  console.log(todos)
 
-  console.log(newTodo)
+  useState(()=>{
+    if(todos.length > 0){
+      setNewTodo(todos[currentIndexTodo].text)
+    }
+  },[])
 
   const addTodoHandle = () =>{
     if(!newTodo){

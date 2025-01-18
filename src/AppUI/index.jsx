@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useContext, useCallback } from "react";
 import Todo from "../components/Todo";
 import { TodoContext } from "../components/Context";
-import AddTodoModal from "../components/AddTodoModal";
+import TodoModal from "../components/TodoModal";
 import TodosCounter from "../components/TodosCounter";
 import HeaderBar from "../components/HeaderBar";
 import { useFonts } from "expo-font";
@@ -14,7 +14,7 @@ import AddTodoButton from "../components/AddTodoButton";
 SplashScreen.preventAutoHideAsync();
 
 export default function AppUI() {
-  const { todos, showAddTodoModal, setShowTodoModal, setViewTodoModal } = useContext(TodoContext);
+  const { todos, showAddTodoModal, setShowTodoModal, setViewTodoModal, isDeleteOption, setIsDeleteOption, deleteTodos } = useContext(TodoContext);
 
   const [isLoaded] = useFonts({
     "jost-regular": require("../../assets/fonts/Jost-Regular.ttf"),
@@ -37,6 +37,11 @@ export default function AppUI() {
     setShowTodoModal(true)
   }
 
+  const deleteListTodos = () =>{
+    deleteTodos()
+    setIsDeleteOption(false)
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <HeaderBar />
@@ -51,18 +56,28 @@ export default function AppUI() {
           showsVerticalScrollIndicator={false}
         />
         <View style={styles.addTodoFloatButton}>
+        { isDeleteOption ?
+          <AddTodoButton 
+            touchFunction={()=>deleteListTodos()}
+            icon="delete-sweep"
+            text="Borrar todos los items"
+            textColor="white"
+            bgColor="#FF0000"
+          />
+          :
           <AddTodoButton 
             touchFunction={()=>showModal()}
             icon="add"
             text="Agregar"
           />
+        }
         </View>
         <Modal 
           visible={showAddTodoModal}
           animationType='slide'
           transparent={true}          
         >
-          <AddTodoModal />
+          <TodoModal />
         </Modal>
       </View>
     </SafeAreaView>
